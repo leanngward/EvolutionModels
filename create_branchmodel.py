@@ -102,14 +102,14 @@ geneName = ''
 
 
 for items in dirList:
-        geneDirName = dirName + items
-        if(os.path.isdir(geneDirName)):
-                geneName = items
-                seqFileName = dirName+geneName+"/"+"nuc_"+geneName+"_aligned.phy"
-                treeFileName = treeDir+geneName+"_edited_tree.nwk" #LOCATION OF EDITED TREEFILES
-                nulloutFileName = dirName+geneName+"/"+geneName+"_null.out"
-                altoutFileName = dirName+geneName+"/"+geneName+"_alt.out"
-                altScriptName = dirName+geneName+"_alt_runcod.sh"
-                nullScriptName = dirName+geneName+"_null_runcod.sh"
-                codeml_branches_runner(dirName,seqFileName,treeFileName,altoutFileName,altScriptName,geneName)
-                null_codeml_branches_runner(dirName,seqFileName,treeFileName,nulloutFileName,nullScriptName,geneName)
+	geneDirName = dirName + items
+	if(os.path.isdir(geneDirName)):
+		geneName = items
+		seqFileName = dirName+geneName+"/"+"nuc_"+geneName+"_aligned.phy"
+		treeFileName = treeDir+geneName+"_edited_tree.nwk" #LOCATION OF EDITED TREEFILES
+		nulloutFileName = dirName+geneName+"/"+geneName+"_null.out"
+		altoutFileName = dirName+geneName+"/"+geneName+"_alt.out"
+		altScriptName = dirName+geneName+"_alt_runcod.sh"
+		nullScriptName = dirName+geneName+"_null_runcod.sh"
+		codeml_branches_runner(dirName,seqFileName,treeFileName,altoutFileName,altScriptName,geneName)
+		null_codeml_branches_runner(dirName,seqFileName,treeFileName,nulloutFileName,nullScriptName,geneName)
