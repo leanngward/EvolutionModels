@@ -9,7 +9,7 @@ dirList = os.listdir(dirName)
 outName = sys.argv[2]
 outDir = os.mkdir(outName)
 #This scripts takes treefiles created by prunetrees.py and parses them by adding the genename after underscores
-#and changing the "2" to a "#1" to run with codeml.
+#and changing the "2" to a {Foreground} for HyPhy models allowng a predefined hypothesis
 #It outputs all the treefiles as *genename*_edited_tree.nwk into the provided output directory name.
 
 newline = ''
@@ -25,7 +25,7 @@ for filename in dirList:
 		elif c == "1":
 			pass
 		elif c == "2":
-			newline += "#1"
+			pass
 		elif c == "_":
 			newline += "_"
 			newline += geneName

@@ -34,8 +34,7 @@ def null_codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfi
     with open(scriptfile_b, 'w') as fh:
         fh.write('#!/bin/bash\n')
         fh.write('cd '+codeml_prefix+' \n')
-        fh.write('module load PAML \n')
-        fh.write('codeml ')
+        fh.write('/home/amanda/software/paml4.9j/bin/codeml ')
         fh.write(control_file_name)
         fh.write('\n')
 
@@ -78,8 +77,7 @@ def codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfile_b,
     with open(scriptfile_b, 'w') as fh:
         fh.write('#!/bin/bash\n')
         fh.write('cd '+codeml_prefix+' \n')
-        fh.write('module load PAML \n')
-        fh.write('codeml ')
+        fh.write('/home/amanda/software/paml4.9j/bin/codeml ')
         fh.write(control_file_name)
         fh.write('\n')
 
