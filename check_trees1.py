@@ -1,9 +1,13 @@
 from ete3 import Tree
 import os
 import re
+import sys
 
-treefilename  = input("Enter master tree name: ")
-dirname = input("Enter tree file directory: ")
+#run command: python3 check_trees1.py [master tree] [directory of tree files you are checking]
+#USE: check spelling of species names by cross referencing with master tree. helps make sure both are correct
+
+treefilename  = sys.argv[1]
+dirname = sys.argv[2]
 supertree = Tree(treefilename)
 exists = False
 checkname = ''

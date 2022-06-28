@@ -1,9 +1,9 @@
 import os
-
+import sys
 def null_codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfile_b,gene_name):
     import subprocess
     #create the control file for codeml to run
-    control_file_name = codeml_prefix  + gene_name + '_nullbranches.ctl'
+    control_file_name = codeml_prefix  + gene_name + '_null.ctl'
     with open(control_file_name, 'w') as fh:
         fh.write('seqfile = ' + seq_file +'\n')
         fh.write('treefile = '+ treefile +'\n')
@@ -46,7 +46,7 @@ def null_codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfi
 def codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfile_b, gene_name):
     import subprocess
     #create the control file for codeml to run
-    control_file_name = codeml_prefix  + gene_name + '_altbranches.ctl'
+    control_file_name = codeml_prefix  + gene_name + '_alt.ctl'
     with open(control_file_name, 'w') as fh: 
         fh.write('seqfile = ' + seq_file +'\n')
         fh.write('treefile = '+ treefile +'\n')
@@ -85,9 +85,11 @@ def codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfile_b,
     subprocess.call(['qsub', scriptfile_b])
 
 
+#Provide directory of the gene name subdirectories
+dirName = sys.argv[1]
 
-#dirName = input("Please provide gene directory name: ")
-dirName = "/home/leann/lib/longevity_dnds/run6genes/"
+#Provide location of edited tree files
+treeDir = sys.argv[2]
 
 #nullInFile = "/home/leann/lib/longevity_dnds/null.ctl"
 #altInFile = "/home/leann/lib/longevity_dnds/alternative.ctl"
@@ -104,7 +106,7 @@ for items in dirList:
         if(os.path.isdir(geneDirName)):
                 geneName = items
                 seqFileName = dirName+geneName+"/"+"nuc_"+geneName+"_aligned.phy"
-                treeFileName = "/home/leann/lib/longevity_dnds/editedtreefiles/"+geneName+"_edited_tree.nwk" #LOCATION OF EDITED TREEFILES
+                treeFileName = treeDir+geneName+"_edited_tree.nwk" #LOCATION OF EDITED TREEFILES
                 nulloutFileName = dirName+geneName+"/"+geneName+"_null.out"
                 altoutFileName = dirName+geneName+"/"+geneName+"_alt.out"
                 altScriptName = dirName+geneName+"_alt_runcod.sh"

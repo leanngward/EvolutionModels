@@ -1,20 +1,22 @@
 import os
 import re
+import sys
 
-dirName = input("Please enter pruned tree directory path: ")
-#dirName = "/home/leann/lib/alignments/prunedtrees/"
+#Provide a directory a pruned tree files
+dirName = sys.argv[1]
 dirList = os.listdir(dirName)
 
+outName = sys.argv[2]
+outDir = os.mkdir(outName)
 #This scripts takes treefiles created by prunetrees.py and parses them by adding the genename after underscores
 #and changing the "2" to a "$1" to run with codeml.
-#It outputs all the treefiles as *genename*_edited_tree.nwk
+#It outputs all the treefiles as *genename*_edited_tree.nwk into the provided output directory name.
 
 newline = ''
 
 for filename in dirList:
         endloc = re.search("_", filename).end()
         geneName = filename[0:endloc-1]
-        newFileName = geneName + "_edited_tree.nwk"
         openFileName = dirName + filename
         file = open(openFileName, 'r')
         for c in file.readline():
@@ -26,8 +28,7 @@ for filename in dirList:
                 else:
                         newline += c
 
-#       print(newline)
-        newFileName = geneName + "_edited_tree.nwk"
+        newFileName = outName + geneName + "_edited_tree.nwk"
         outfile = open(newFileName, 'w')
         outfile.write(newline)
 

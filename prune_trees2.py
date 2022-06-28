@@ -1,16 +1,27 @@
 from ete3 import Tree
 import os
 import re
+import sys
+import shutil
 
-#for this code, you'll need to put your .nwk files in their own folder. That is the directory name you will input.  For now, I'll do this by hand.
 
-dirName = input("Please input the directory name: ")
-#dirName = "/home/leann/lib/alignments/treefiles/"
-#guideTreeName = "/home/leann/lib/alignments/testsuper2.nwk"  #input("Please input file name for supertree: ")
-guideTreeName = input("Please input file name for supertree: ")
+#For this code, you'll need a directory of .nwk tree files in their own folder. That is the directory name you will input.
+#Then for each file that directory, they will be edited and the new edited file will be placed in an output directory.
+
+dirName = sys.argv[1]
 dirList = os.listdir(dirName)
-superTree = Tree(guideTreeName)
+outputDirName = sys.argv[2]
+outputDir = os.makedirs(outputDirName)
+#for file in dirList:
+#       srcpath = dirName+file
+#       despath = outputDirName + file
+#       if os.path.isfile(srcpath):
+#               shutil.copy(srcpath,despath)
+#               print('copied',file)
 
+#guideTreeName will be the name of your master tree
+guideTreeName = sys.argv[3]
+superTree = Tree(guideTreeName)
 
 #treeFile -> the gene tree
         #NAME FORMAT: treefile name must begin with "*genename*_"
@@ -32,7 +43,7 @@ for filename in dirList:
 
         for node in treeFile.traverse("levelorder"):               #traverses the tree of interest
                 if node.name:                                     
-                        for l in range(len(node.name)):            #stores the node the name in the tree of interest w/o the genename
+                        for l in range(len(node.name)):            #stores the node name in the tree of interest w/o the genename
                                 if node.name[l]  == "_":
                                         nodename += "_"
                                         break
@@ -41,12 +52,11 @@ for filename in dirList:
 
                         nodeList.append(nodename)                 #appends the node names to a list
                         nodename = '' 
-        #print(nodeList)
 
         superTree.prune(nodeList)                                 #uses the master tree to prune just the nodes from the treefile
         #print(superTree.get_ascii(attributes=["name", "dist", "label", "complex"]))
 
-        newTreeName = geneName+"_pruned_tree.nwk"                 #create the output file name
+        newTreeName = outputDirName+geneName+"_pruned_tree.nwk"                 #create the output file name and put into output directory
         superTree.write(format=0, outfile=newTreeName)            #write the prunces supertree to the newfile
         nodeList = []                                             #empty the node list
 
