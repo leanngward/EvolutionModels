@@ -86,7 +86,7 @@
 
 
 ##### 8. create_codeml_files.py
-   Update 3/10/2022: create_branchmodel.py
+   	Update 3/10/2022: create_branchmodel.py
 	Need: You will need a directory full of gene group subdirectories and a directory of you final tree files. These should be created by the previous scripts.
 	Run Command: python3 create_codeml_files.py [directory of group directories] [tree file directory]
 	How it Works: This file uses the subdirectory groupname to create codeml control files for both an alternative and null branch model. It also creates
