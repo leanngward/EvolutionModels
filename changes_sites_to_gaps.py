@@ -47,7 +47,7 @@ for items in dirList:
 #						print(count)
 					else:
 						newseq += x
-				outFile.write(str(items.id)+" ")
+				outFile.write(str(items.id)+"  ")
 				outFile.write(newseq+"\n")
 		outFile.close()
 siteList.close()

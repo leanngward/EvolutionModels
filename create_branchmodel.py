@@ -40,7 +40,7 @@ def null_codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfi
         fh.write('\n')
 
     ## submit the pbs.sh
-    subprocess.call(['qsub', scriptfile_b])
+#    subprocess.call(['qsub', scriptfile_b])
 
 
 
@@ -84,7 +84,7 @@ def codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfile_b,
         fh.write('\n')
 
     ## submit the pbs.sh
-    subprocess.call(['qsub', scriptfile_b])
+#    subprocess.call(['qsub', scriptfile_b])
 
 
 #Provide directory of the gene name subdirectories
@@ -109,9 +109,9 @@ for items in dirList:
 		geneName = items
 		seqFileName = dirName+geneName+"/"+"nuc_"+geneName+"_aligned.phy"
 		treeFileName = treeDir+geneName+"_edited_tree.nwk" #LOCATION OF EDITED TREEFILES
-		nulloutFileName = dirName+geneName+"/"+geneName+"_null.out"
-		altoutFileName = dirName+geneName+"/"+geneName+"_alt.out"
-		altScriptName = dirName+geneName+"_alt_runcod.sh"
-		nullScriptName = dirName+geneName+"_null_runcod.sh"
+		nulloutFileName = dirName+geneName+"/"+geneName+"_null_branch.out"
+		altoutFileName = dirName+geneName+"/"+geneName+"_alt_branch.out"
+		altScriptName = dirName+geneName+"_alt_branch_runcod.sh"
+		nullScriptName = dirName+geneName+"_null_branch_runcod.sh"
 		codeml_branches_runner(dirName,seqFileName,treeFileName,altoutFileName,altScriptName,geneName)
 		null_codeml_branches_runner(dirName,seqFileName,treeFileName,nulloutFileName,nullScriptName,geneName)

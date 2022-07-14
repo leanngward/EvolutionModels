@@ -19,7 +19,7 @@ do
 				iqtree -s "nuc_${GENENAME}_aligned.fasta" -nt 3
 #				perl /home/leann/lib/Fasta2Phylip.pl "nuc_${GENENAME}_aligned.fasta" "nuc_${GENENAME}_aligned.phy"   #this transform the fasta alignment into a phylip file for codeml
 				python /scratch/Hoffmann/leann/evomodel_scripts/fasta2phy.py "nuc_${GENENAME}_aligned.fasta" > "nuc_${GENENAME}_aligned.phy"
-				cp "nuc_${GENENAME}_aligned.fasta.treefile" /scratch/Hoffmann/leann/test_evo_pipe_on_lugh/treefile_dir/"${GENENAME}_tree.nwk"
+				cp "nuc_${GENENAME}_aligned.fasta.treefile" /scratch/Hoffmann/leann/poly_testgroups_run5/original_treefiles/"${GENENAME}_tree.nwk"
 
 			fi
 		done

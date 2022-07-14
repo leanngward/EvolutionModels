@@ -16,7 +16,7 @@ def absrel_run(prefix,seq_file,treefile,outfile,scriptfile_b,gene_name):
 		fh.write('\n')
 
     ## submit the pbs.sh
-	subprocess.call(['qsub', scriptfile_b])
+#	subprocess.call(['qsub', scriptfile_b])
 
 
 #Provide directory of the gene name subdirectories

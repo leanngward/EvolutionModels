@@ -2,6 +2,14 @@ LeAnn's dN/dS pipeline using the output of Orthofinder
 
 1. Copy results file fill with single copy orthogroups. 
 
+Note: If the fasta file were translated into proteins and THEN run with Orthofinder,
+you will have to process the files with pal2nal to backtranslate them...
+	1.2 Use back_trans_orthogroups_gene.py
+		Run Command: python3 back_trans_orthogroups_gene.py [NUC genomes dir] [PROT orthogroups genomes dir]
+				[output dir name of choice]
+		How it Works: It grabs all the nucleotide sequences from the original files based off the record ID's
+				This allows it to fit within the rest of the pipeline as is.
+
 2. Use rename_orthogroup_genes.py
 	Need: Directory filled with single copy orthogroup fasta files, directory filled with genome files used to run orthofinder
 	Run Command: python3 rename_orthogroup_genes.py [genomes dir] [ortho/groups genomes dir] [output dir name of choice]
@@ -132,7 +140,19 @@ LeAnn's dN/dS pipeline using the output of Orthofinder
 		How it Works: calls the Hyphy FitMulti model and outputs a .json file with naming
 				scheme ending with ".fasta.FITTER.json"
 
+UPDATE 6/30/2022
+	To compensate for job submission limits in Lugh, I have commented out the automatic 'qsub' 
+	process in my run files above.
 
+	Instead, I will run the jobs in batches like this:
+	
+	1. Run Command: python3 make_submission_list.py [directory name] [string flag] [output name]
+		Note: The string flag will indicated which .sh files you want to make a list of.
+			The output name will be the name of the list files.
+
+	2. Run Command: python3 submit_jobs_from_list.py [list name] [START line#] [END line#]
+			Note: there must be a space between the start and line range.
+				The files in this line range will be submitted to the queue
 
 9. read_codeml_output.py
 	Need: Directory of gene group subdirectories and the NAME of the output file you want. It is tab delimited

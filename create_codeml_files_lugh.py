@@ -40,7 +40,7 @@ def null_codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfi
         fh.write('\n')
 
     ## submit the pbs.sh
-    subprocess.call(['qsub', scriptfile_b])
+#    subprocess.call(['qsub', scriptfile_b])
 
 
 
@@ -84,7 +84,7 @@ def codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfile_b,
         fh.write('\n')
 
     ## submit the pbs.sh
-    subprocess.call(['qsub', scriptfile_b])
+#    subprocess.call(['qsub', scriptfile_b])
 
 
 #Provide directory of the gene name subdirectories

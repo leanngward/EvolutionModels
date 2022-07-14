@@ -134,16 +134,16 @@ for file in os.listdir(filedir):
 			if os.path.isfile(fullpathsubfile):
 				if re.search(".treefile",subfile):
 					groupname = subfile[4:-23]
-				if re.search("_null_branchsite.out",subfile):
+				if re.search("_null_mnm_branchsite.out",subfile):
 					nullflag = True
 					nullfile = fullpathsubfile
 					nullvalues = read_null(nullfile) 
-				if re.search("_alt_branchsite.out",subfile):
+				if re.search("_alt_mnm_branchsite.out",subfile):
 					altflag = True
 					altfile = fullpathsubfile
 					altvalues = read_alt(altfile)
 					sites = "\t".join(altvalues[9])
-		print(sites)
+		#print(sites)
 		if nullflag == True and altflag == True:
 			outfile.write(groupname+"\t"+nullvalues+"\t"+altvalues[0]+"\t"+altvalues[1]+"\t"+altvalues[2]+"\t"+altvalues[3]+"\t"+altvalues[4]+"\t"+altvalues[5])
 			outfile.write("\t"+altvalues[6]+"\t"+altvalues[7]+"\t"+altvalues[8]+"\n")

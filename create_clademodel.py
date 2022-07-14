@@ -40,7 +40,7 @@ def null_codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfi
         fh.write('\n')
 
     ## submit the pbs.sh
-    subprocess.call(['qsub', scriptfile_b])
+#    subprocess.call(['qsub', scriptfile_b])
 
 
 
@@ -84,7 +84,7 @@ def codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfile_b,
         fh.write('\n')
 
     ## submit the pbs.sh
-    subprocess.call(['qsub', scriptfile_b])
+#    subprocess.call(['qsub', scriptfile_b])
 
 
 #Provide directory of the gene name subdirectories
@@ -92,6 +92,8 @@ dirName = sys.argv[1]
 
 #Provide location of edited tree files
 treeDir = sys.argv[2]
+
+#Provide location of qsub's to perform
 
 #nullInFile = "/home/leann/lib/longevity_dnds/null.ctl"
 #altInFile = "/home/leann/lib/longevity_dnds/alternative.ctl"

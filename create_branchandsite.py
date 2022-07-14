@@ -40,7 +40,7 @@ def null_codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfi
         fh.write('\n')
 
     ## submit the pbs.sh
-    subprocess.call(['qsub', scriptfile_b])
+#    subprocess.call(['qsub', scriptfile_b])
 
 
 
@@ -84,7 +84,7 @@ def codeml_branches_runner(codeml_prefix,seq_file,treefile,outfile,scriptfile_b,
         fh.write('\n')
 
     ## submit the pbs.sh
-    subprocess.call(['qsub', scriptfile_b])
+#    subprocess.call(['qsub', scriptfile_b])
 
 
 #Provide directory of the gene name subdirectories
@@ -92,26 +92,38 @@ dirName = sys.argv[1]
 
 #Provide location of edited tree files
 treeDir = sys.argv[2]
-
-#nullInFile = "/home/leann/lib/longevity_dnds/null.ctl"
-#altInFile = "/home/leann/lib/longevity_dnds/alternative.ctl"
-#nullInFile = input("Input Blank Null file name: ")
-#altInFile = input("Input Blank Alt file name: ")
+flag = ''
+mnmFlag = False
+#Provide True or False for whether you are tested files with removed sites affected by multi-nucleotide mutations
+try:
+	flag = sys.argv[3]
+	if flag == "T":
+		mnmFlag = True
+	else:
+		mnmFlag = False
+except IndexError:
+	pass
 
 dirList = os.listdir(dirName)
 geneDirName = ''
 geneName = ''
 
-
 for items in dirList:
 	geneDirName = dirName + items
 	if(os.path.isdir(geneDirName)):
 		geneName = items
-		seqFileName = dirName+geneName+"/"+"nuc_"+geneName+"_aligned.phy"
 		treeFileName = treeDir+geneName+"_edited_tree.nwk" #LOCATION OF EDITED TREEFILES
-		nulloutFileName = dirName+geneName+"/"+geneName+"_null_branchsite.out"
-		altoutFileName = dirName+geneName+"/"+geneName+"_alt_branchsite.out"
-		altScriptName = dirName+geneName+"_alt_bsite_runcod.sh"
-		nullScriptName = dirName+geneName+"_null_bsite_runcod.sh"
+		if mnmFlag == False:
+			seqFileName = dirName+geneName+"/"+"nuc_"+geneName+"_aligned.phy"
+			nulloutFileName = dirName+geneName+"/"+geneName+"_null_branchsite.out"
+			altoutFileName = dirName+geneName+"/"+geneName+"_alt_branchsite.out"
+			altScriptName = dirName+geneName+"_alt_bsite_runcod.sh"
+			nullScriptName = dirName+geneName+"_null_bsite_runcod.sh"
+		else:
+			seqFileName = dirName+geneName+"/edited_sites_nuc_"+geneName+"_aligned.phy"
+			nulloutFileName = dirName+geneName+"/"+geneName+"_null_mnm_branchsite.out"
+			altoutFileName = dirName+geneName+"/"+geneName+"_alt_mnm_branchsite.out"
+			altScriptName = dirName+geneName+"_alt_bsite_mnm_runcod.sh"
+			nullScriptName = dirName+geneName+"_null_bsite_mnm_runcod.sh"
 		codeml_branches_runner(dirName,seqFileName,treeFileName,altoutFileName,altScriptName,geneName)
 		null_codeml_branches_runner(dirName,seqFileName,treeFileName,nulloutFileName,nullScriptName,geneName)

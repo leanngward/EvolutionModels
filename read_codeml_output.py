@@ -102,11 +102,11 @@ for file in os.listdir(filedir):
 			if os.path.isfile(fullpathsubfile):
 				if re.search(".treefile",subfile):
 					groupname = subfile[4:-23]
-				if re.search("_null.out",subfile):
+				if re.search("_null_branch.out",subfile):
 					nullflag = True
 					nullfile = fullpathsubfile
 					nullvalues = read_null(nullfile) 
-				if re.search("_alt.out",subfile):
+				if re.search("_alt_branch.out",subfile):
 					altflag = True
 					altfile = fullpathsubfile
 					altvalues = read_alt(altfile)
